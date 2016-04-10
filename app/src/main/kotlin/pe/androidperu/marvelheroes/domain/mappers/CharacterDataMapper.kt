@@ -1,8 +1,8 @@
-package pe.androidperu.kotlinproyectobase.domain.mappers
+package pe.androidperu.marvelheroes.domain.mappers
 
-import pe.androidperu.kotlinproyectobase.data.CharacterResult
-import pe.androidperu.kotlinproyectobase.data.ComicCharacter
-import pe.androidperu.kotlinproyectobase.domain.model.Hero
+import pe.androidperu.marvelheroes.data.CharacterResult
+import pe.androidperu.marvelheroes.data.ComicCharacter
+import pe.androidperu.marvelheroes.domain.model.Hero
 import java.util.*
 
 /**
@@ -34,6 +34,9 @@ class CharacterDataMapper {
     }
 
     private fun convertCharacterItemToDomain(character: ComicCharacter): Hero {
-        return Hero(character.name, character.description)
+        return Hero(character.name, character.description,
+                generateThumbnailUrl(character.thumbnail.path, character.thumbnail.extension))
     }
+
+    private fun generateThumbnailUrl(path: String, extension: String): String = "$path.$extension"
 }

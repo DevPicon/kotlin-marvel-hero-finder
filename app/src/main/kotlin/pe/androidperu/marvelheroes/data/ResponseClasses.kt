@@ -1,9 +1,10 @@
-package pe.androidperu.kotlinproyectobase.data
+package pe.androidperu.marvelheroes.data
 
 /**
  * Created by Armando on 4/9/2016.
  *
- * Estas clases permitirán mapear el resultado del JSON
+ * Estas clases permitirán mapear el resultado del JSON, en Kotlin al definir clases del tipo
+ * 'data class' hacen las veces de POJOs
  */
 data class CharacterResult(val code: Int, val status: String, val copyright: String,
                            val attributionText: String, val data: CharacterDataContainer)

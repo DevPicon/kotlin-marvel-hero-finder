@@ -1,8 +1,8 @@
-package pe.androidperu.kotlinproyectobase.data.commands
+package pe.androidperu.marvelheroes.data.commands
 
 import android.util.Log
 import com.google.gson.Gson
-import pe.androidperu.kotlinproyectobase.data.CharacterResult
+import pe.androidperu.marvelheroes.data.CharacterResult
 import java.net.URL
 
 /**

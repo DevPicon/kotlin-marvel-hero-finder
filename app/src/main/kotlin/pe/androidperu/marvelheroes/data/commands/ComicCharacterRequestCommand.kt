@@ -1,7 +1,7 @@
-package pe.androidperu.kotlinproyectobase.data.commands
+package pe.androidperu.marvelheroes.data.commands
 
-import pe.androidperu.kotlinproyectobase.domain.mappers.CharacterDataMapper
-import pe.androidperu.kotlinproyectobase.domain.model.Hero
+import pe.androidperu.marvelheroes.domain.mappers.CharacterDataMapper
+import pe.androidperu.marvelheroes.domain.model.Hero
 
 /**
  * Created by Armando on 4/9/2016.
