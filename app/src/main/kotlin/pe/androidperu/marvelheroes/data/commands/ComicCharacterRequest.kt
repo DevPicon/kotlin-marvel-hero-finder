@@ -12,6 +12,8 @@ import java.net.URL
 class ComicCharacterRequest {
 
     /**
+     * El valor de estas constantes deben cambiarse por las propias
+     * @see https://developer.marvel.com/documentation/authorization
      * @see https://kotlinlang.org/docs/reference/object-declarations.html#companion-objects
      */
     companion object {
