@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import org.jetbrains.anko.async
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
+import pe.androidperu.marvelheroes.domain.model.Hero
 import pe.androidperu.marvelheroes.ui.adapters.ComicCharacterListAdapter
 
 /**
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         async() {
             val result = ComicCharacterRequestCommand().execute()
             uiThread {
-                comicCharacterRecyclerView.adapter = ComicCharacterListAdapter(result)
+                comicCharacterRecyclerView.adapter = ComicCharacterListAdapter(result) { comicCharacter: Hero -> toast(comicCharacter.description) }
                 longToast("Se realizó la consulta")
             }
         }

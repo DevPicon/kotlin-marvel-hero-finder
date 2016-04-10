@@ -16,7 +16,7 @@ import pe.androidperu.marvelheroes.ui.utils.ctx
 /**
  * Created by Armando on 4/9/2016.
  */
-class ComicCharacterListAdapter(val items: List<Hero>) :
+class ComicCharacterListAdapter(val items: List<Hero>, val itemClick: (Hero) -> Unit) :
         RecyclerView.Adapter<ComicCharacterListAdapter.ViewHolder>() {
 
     // Cuando una función cuenta con una sola línea, esta se puede simplificar
@@ -24,14 +24,14 @@ class ComicCharacterListAdapter(val items: List<Hero>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.ctx).inflate(R.layout.item_hero, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, itemClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindCharacter(items[position])
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, val itemClick: (Hero) -> Unit) : RecyclerView.ViewHolder(view) {
         private val thumbnailView: ImageView
         private val nameView: TextView
         private val descriptionView: TextView
@@ -51,8 +51,13 @@ class ComicCharacterListAdapter(val items: List<Hero>) :
                         .into(thumbnailView)
                 nameView.text = name
                 descriptionView.text = description
+                itemView.setOnClickListener { itemClick(this) }
             }
         }
     }
+
+    /*interface OnItemClickListener {
+        operator fun invoke(comicCharacter: Hero)
+    }*/
 
 }
