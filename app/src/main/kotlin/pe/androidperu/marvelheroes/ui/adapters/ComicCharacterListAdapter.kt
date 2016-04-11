@@ -5,16 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_hero.view.*
 import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.domain.model.Hero
 import pe.androidperu.marvelheroes.ui.utils.ctx
 
 /**
  * Created by Armando on 4/9/2016.
+ *
+ * Empleamos un import sintético para tener acceso directo a los elementos de la vista
  */
 class ComicCharacterListAdapter(val items: List<Hero>, val itemClick: (Hero) -> Unit) :
         RecyclerView.Adapter<ComicCharacterListAdapter.ViewHolder>() {
@@ -32,15 +32,7 @@ class ComicCharacterListAdapter(val items: List<Hero>, val itemClick: (Hero) -> 
     }
 
     class ViewHolder(view: View, val itemClick: (Hero) -> Unit) : RecyclerView.ViewHolder(view) {
-        private val thumbnailView: ImageView
-        private val nameView: TextView
-        private val descriptionView: TextView
 
-        init {
-            thumbnailView = view.find(R.id.heroThumbnailImageView)
-            nameView = view.find(R.id.heroNameTextView)
-            descriptionView = view.find(R.id.heroOverviewTextView)
-        }
 
         fun bindCharacter(character: Hero) {
             with(character) {
@@ -48,9 +40,9 @@ class ComicCharacterListAdapter(val items: List<Hero>, val itemClick: (Hero) -> 
                 Picasso.with(itemView.ctx).load(thumbnailUrl)
                         .resize(48, 48)
                         .centerCrop()
-                        .into(thumbnailView)
-                nameView.text = name
-                descriptionView.text = description
+                        .into(itemView.heroThumbnailImageView)
+                itemView.heroNameTextView.text = name
+                itemView.heroOverviewTextView.text = description
                 itemView.setOnClickListener { itemClick(this) }
             }
         }

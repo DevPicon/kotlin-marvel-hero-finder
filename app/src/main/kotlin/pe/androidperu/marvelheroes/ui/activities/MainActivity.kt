@@ -3,8 +3,11 @@ package pe.androidperu.marvelheroes.ui.activities
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import org.jetbrains.anko.*
+import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.async
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.uiThread
 import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
 import pe.androidperu.marvelheroes.domain.model.Hero
@@ -20,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Aqui estamos usando la función 'find' de Anko para obtener el recycler view
-        val comicCharacterRecyclerView: RecyclerView = find(R.id.heroList)
-        comicCharacterRecyclerView.layoutManager = LinearLayoutManager(this)
+        characterListRecyclerView.layoutManager = LinearLayoutManager(this)
 
         /**
          * Async nos permite remplazar el AsynTask y mediante el uiThread podemos acceder al hilo
@@ -30,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         async() {
             val result = ComicCharacterRequestCommand().execute()
             uiThread {
-                comicCharacterRecyclerView.adapter = ComicCharacterListAdapter(result) { comicCharacter: Hero -> toast(comicCharacter.description) }
+                characterListRecyclerView.adapter = ComicCharacterListAdapter(result) {
+                    comicCharacter: Hero ->
+                    toast(comicCharacter.description)
+                }
                 longToast("Se realizó la consulta")
             }
         }

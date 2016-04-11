@@ -7,7 +7,7 @@
     tools:context=".ui.activities.MainActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/heroList"
+        android:id="@+id/characterListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
