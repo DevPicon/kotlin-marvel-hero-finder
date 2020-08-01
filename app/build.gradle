@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -11,6 +15,9 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
+        buildConfigField("String", "MARVEL_PUBLIC_KEY", apikeyProperties['MARVEL_PUBLIC_KEY'])
+        buildConfigField("String", "MARVEL_PRIVATE_KEY", apikeyProperties['MARVEL_PRIVATE_KEY'])
     }
     buildTypes {
         release {

@@ -2,6 +2,7 @@ package pe.androidperu.marvelheroes.data.commands
 
 import android.util.Log
 import com.google.gson.Gson
+import pe.androidperu.marvelheroes.BuildConfig
 import pe.androidperu.marvelheroes.data.CharacterResult
 import java.net.URL
 
@@ -18,10 +19,10 @@ class ComicCharacterRequest {
      */
     companion object {
         private val PUBLIC_API_KEY = "a953888a4098cff50b054c9375839786"
-        private val RANDOM_WORD = "armando"
-        private val HASH = "7f3db60eab45a2c204d69b8aafdcfbc9"
-        private val URL = "http://gateway.marvel.com:80/v1/public/characters"
-        private val COMPLETE_URL = "$URL?ts=$RANDOM_WORD&apikey=$PUBLIC_API_KEY&hash=$HASH"
+        private val RANDOM_WORD = "armando" //TODO This word should be replaced by a timestamp
+        private val HASH = "7f3db60eab45a2c204d69b8aafdcfbc9" //TODO this hash should be replaced by a generated one
+        private val URL = "http://gateway.marvel.com:80/v1/public/characters" //TODO this url should be splitted in BASE_URL and ENDPOINT
+        private val COMPLETE_URL = "$URL?ts=$RANDOM_WORD&apikey=${BuildConfig.MARVEL_PUBLIC_KEY}&hash=$HASH"
 
     }
 
