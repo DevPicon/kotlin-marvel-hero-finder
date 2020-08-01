@@ -1,7 +1,7 @@
 package pe.androidperu.marvelheroes.data.commands
 
 import pe.androidperu.marvelheroes.domain.mappers.CharacterDataMapper
-import pe.androidperu.marvelheroes.domain.model.Hero
+import pe.devpicon.android.marvelheroes.domain.Hero
 
 /**
  * Created by Armando on 4/9/2016.

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import pe.androidperu.marvelheroes.databinding.ItemHeroBinding
-import pe.androidperu.marvelheroes.domain.model.Hero
+import pe.devpicon.android.marvelheroes.domain.Hero
 
 /**
  * Created by Armando on 4/9/2016.

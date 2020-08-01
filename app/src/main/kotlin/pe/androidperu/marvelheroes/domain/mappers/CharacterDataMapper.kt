@@ -2,7 +2,7 @@ package pe.androidperu.marvelheroes.domain.mappers
 
 import pe.androidperu.marvelheroes.data.CharacterResult
 import pe.androidperu.marvelheroes.data.ComicCharacter
-import pe.androidperu.marvelheroes.domain.model.Hero
+import pe.devpicon.android.marvelheroes.domain.Hero
 import java.util.*
 
 /**

@@ -9,7 +9,7 @@ import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
 import pe.androidperu.marvelheroes.databinding.ActivityMainBinding
-import pe.androidperu.marvelheroes.domain.model.Hero
+import pe.devpicon.android.marvelheroes.domain.Hero
 import pe.androidperu.marvelheroes.ui.adapters.ComicCharacterListAdapter
 
 /**

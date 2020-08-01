@@ -1,4 +1,4 @@
-package pe.androidperu.marvelheroes.domain.model
+package pe.devpicon.android.marvelheroes.domain
 
 
 /**
