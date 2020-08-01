@@ -1,9 +1,9 @@
-package pe.devpicon.android.marvelheroes.data.networking
+package pe.devpicon.android.marvelheroes.data.remote
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
-import pe.devpicon.android.marvelheroes.data.networking.RestClient.service
+import pe.devpicon.android.marvelheroes.data.remote.RestClient.service
 
 class MarvelServiceTest {
 

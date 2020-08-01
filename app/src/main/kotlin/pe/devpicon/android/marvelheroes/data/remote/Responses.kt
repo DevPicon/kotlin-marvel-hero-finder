@@ -1,4 +1,4 @@
-package pe.devpicon.android.marvelheroes.data.networking
+package pe.devpicon.android.marvelheroes.data.remote
 
 
 data class CharacterResult(val code: Int, val status: String, val copyright: String,

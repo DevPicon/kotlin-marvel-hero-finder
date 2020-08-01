@@ -1,4 +1,4 @@
-package pe.devpicon.android.marvelheroes.data.networking
+package pe.devpicon.android.marvelheroes.data.remote
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain

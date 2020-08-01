@@ -1,4 +1,4 @@
-package pe.devpicon.android.marvelheroes.data.networking
+package pe.devpicon.android.marvelheroes.data.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Query
