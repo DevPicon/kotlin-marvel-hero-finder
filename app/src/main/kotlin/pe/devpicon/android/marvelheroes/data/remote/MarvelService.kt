@@ -8,6 +8,6 @@ interface MarvelService {
     @GET("v1/public/characters")
     suspend fun fetchCharacters(
             @Query("nameStartsWith") nameStartWith: String
-    ): CharacterResult
+    ): CharacterResultResponse
 
 }

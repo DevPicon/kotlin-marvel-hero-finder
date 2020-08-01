@@ -11,7 +11,7 @@ class MarvelServiceTest {
     fun `When Sp text is inserted Then response contains Spiderman`() {
         runBlocking {
             val fetchCharacters = service.fetchCharacters("sp")
-            Assert.assertTrue(fetchCharacters.data.results.isNotEmpty())
+            Assert.assertTrue(fetchCharacters.dataResponse.results.isNotEmpty())
         }
 
     }
