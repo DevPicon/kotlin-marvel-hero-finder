@@ -1,5 +1,6 @@
 package pe.androidperu.marvelheroes.domain.model
 
+
 /**
  * Created by Armando on 4/9/2016.
  *

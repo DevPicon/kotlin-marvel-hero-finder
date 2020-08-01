@@ -7,7 +7,6 @@ import org.jetbrains.anko.async
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
-import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
 import pe.androidperu.marvelheroes.databinding.ActivityMainBinding
 import pe.androidperu.marvelheroes.domain.model.Hero
@@ -35,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         async() {
             val result = ComicCharacterRequestCommand().execute()
             uiThread {
-                binding.characterListRecyclerView.adapter = ComicCharacterListAdapter(result) {
-                    comicCharacter: Hero ->
+                binding.characterListRecyclerView.adapter = ComicCharacterListAdapter(result) { comicCharacter: Hero ->
                     toast(comicCharacter.description)
                 }
                 longToast("Se realizó la consulta")
