@@ -1,15 +1,15 @@
 package pe.androidperu.marvelheroes.ui.activities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import org.jetbrains.anko.async
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
+import pe.androidperu.marvelheroes.databinding.ActivityMainBinding
 import pe.androidperu.marvelheroes.domain.model.Hero
 import pe.androidperu.marvelheroes.ui.adapters.ComicCharacterListAdapter
 
@@ -18,12 +18,15 @@ import pe.androidperu.marvelheroes.ui.adapters.ComicCharacterListAdapter
  */
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Aqui estamos usando la función 'find' de Anko para obtener el recycler view
-        characterListRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.characterListRecyclerView.layoutManager = LinearLayoutManager(this)
 
         /**
          * Async nos permite remplazar el AsynTask y mediante el uiThread podemos acceder al hilo
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         async() {
             val result = ComicCharacterRequestCommand().execute()
             uiThread {
-                characterListRecyclerView.adapter = ComicCharacterListAdapter(result) {
+                binding.characterListRecyclerView.adapter = ComicCharacterListAdapter(result) {
                     comicCharacter: Hero ->
                     toast(comicCharacter.description)
                 }
