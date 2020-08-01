@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Kotlin Marvel Hero Finder</string>
+    <string name="query_hint">Type your hero name</string>
 </resources>
