@@ -6,4 +6,8 @@ package pe.devpicon.android.marvelheroes.domain
  *
  * Este archivo contendrá las clases correspondientes al dominio
  */
-data class Hero(val name: String, val description: String, val thumbnailUrl: String)
+data class Hero(
+        val id: Long,
+        val name: String,
+        val description: String,
+        val thumbnailUrl: String)

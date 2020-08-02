@@ -1,13 +1,27 @@
 package pe.devpicon.android.marvelheroes.data.remote
 
+import com.google.gson.annotations.SerializedName
 
-data class CharacterResultResponse(val code: Int, val status: String, val copyright: String,
-                                   val attributionText: String, val dataResponse: CharacterDataContainerResponse)
+data class CharacterResultResponse(
+        @SerializedName("code") val code: Int,
+        @SerializedName("status") val status: String,
+        @SerializedName("copyright") val copyright: String,
+        @SerializedName("attributionText") val attributionText: String,
+        @SerializedName("data") val dataResponse: CharacterDataContainerResponse)
 
-data class CharacterDataContainerResponse(val offset: Int, val limit: Int, val total: Int, val count: Int,
-                                          val results: List<ComicCharacterResponse>)
+data class CharacterDataContainerResponse(
+        @SerializedName("offset") val offset: Int,
+        @SerializedName("limit") val limit: Int,
+        @SerializedName("total") val total: Int,
+        @SerializedName("count") val count: Int,
+        @SerializedName("results") val results: List<ComicCharacterResponse>)
 
-data class ComicCharacterResponse(val id: Long, val name: String, val description: String, val modified: String,
-                                  val resourceUri: String, val thumbnailResponse: ThumbnailResponse)
+data class ComicCharacterResponse(
+        @SerializedName("id") val id: Long,
+        @SerializedName("name") val name: String,
+        @SerializedName("description") val description: String,
+        @SerializedName("modified") val modified: String,
+        @SerializedName("resourceUri") val resourceUri: String,
+        @SerializedName("thumbnail") val thumbnailResponse: ThumbnailResponse)
 
 data class ThumbnailResponse(val path: String, val extension: String)
