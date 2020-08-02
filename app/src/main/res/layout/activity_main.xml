@@ -17,6 +17,7 @@
         app:titleTextColor="@android:color/white">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/sv_search_hero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:closeIcon="@drawable/ic_close_white"
@@ -34,7 +35,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-        tools:context=".ui.activities.MainActivity">
+        tools:context="pe.devpicon.android.marvelheroes.presentation.home.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/characterListRecyclerView"
@@ -42,6 +43,16 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/item_hero" />
     </FrameLayout>
+
+
+    <ListView
+        android:id="@+id/lv_search_result_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     
