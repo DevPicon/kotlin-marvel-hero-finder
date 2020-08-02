@@ -8,7 +8,7 @@ import pe.androidperu.marvelheroes.databinding.HeroSearchListItemBinding
 
 class SearchAdapter : BaseAdapter() {
 
-    private val heroes = mutableListOf<HeroViewState>()
+    private val heroes = mutableListOf<SearchViewState>()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemBinding = HeroSearchListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,9 +22,9 @@ class SearchAdapter : BaseAdapter() {
 
     override fun getCount(): Int = heroes.size
 
-    fun setData(heroResultList: List<HeroViewState>) {
+    fun setData(searchResultList: List<SearchViewState>) {
         this.heroes.clear()
-        this.heroes.addAll(heroResultList)
+        this.heroes.addAll(searchResultList)
         notifyDataSetChanged()
     }
 }

@@ -4,7 +4,7 @@ import pe.devpicon.android.marvelheroes.domain.Hero
 
 class MainViewStateMapper {
 
-    fun mapHeroToViewState(heroList: List<Hero>): List<HeroViewState> {
-        return heroList.map { HeroViewState(it.id, it.name) }
+    fun mapHeroToViewState(heroList: List<Hero>): List<SearchViewState> {
+        return heroList.map { SearchViewState(it.id, it.name) }
     }
 }

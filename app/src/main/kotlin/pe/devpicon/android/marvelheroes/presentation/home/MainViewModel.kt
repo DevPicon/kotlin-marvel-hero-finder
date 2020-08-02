@@ -39,7 +39,7 @@ class MainViewModel(
 
     val heroes = _heroes.asLiveData()
 
-    suspend fun searchHero(queryText: String): List<HeroViewState> {
+    suspend fun searchHero(queryText: String): List<SearchViewState> {
         val heroListResult = viewModelScope.async { repository.searchHero(queryText) }
         return mainViewStateMapper.mapHeroToViewState(heroListResult.await())
     }

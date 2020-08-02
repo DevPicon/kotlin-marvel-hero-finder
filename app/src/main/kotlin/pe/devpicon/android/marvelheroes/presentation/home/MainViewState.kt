@@ -1,6 +1,6 @@
 package pe.devpicon.android.marvelheroes.presentation.home
 
-data class HeroViewState(
+data class SearchViewState(
         val id: Long,
         val name: String
 )
