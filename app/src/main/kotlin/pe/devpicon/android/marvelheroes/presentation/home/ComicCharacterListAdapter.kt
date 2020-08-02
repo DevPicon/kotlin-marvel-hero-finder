@@ -1,4 +1,4 @@
-package pe.androidperu.marvelheroes.ui.adapters
+package pe.devpicon.android.marvelheroes.presentation.home
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,14 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import pe.androidperu.marvelheroes.databinding.ItemHeroBinding
 import pe.devpicon.android.marvelheroes.domain.Hero
+import pe.devpicon.android.marvelheroes.presentation.home.ComicCharacterListAdapter.ViewHolder
 
-/**
- * Created by Armando on 4/9/2016.
- *
- * Empleamos un import sintético para tener acceso directo a los elementos de la vista
- */
 class ComicCharacterListAdapter(val items: List<Hero>, val itemClick: (Hero) -> Unit) :
-        RecyclerView.Adapter<ComicCharacterListAdapter.ViewHolder>() {
+        RecyclerView.Adapter<ViewHolder>() {
 
     // Cuando una función cuenta con una sola línea, esta se puede simplificar
     override fun getItemCount(): Int = items.size
