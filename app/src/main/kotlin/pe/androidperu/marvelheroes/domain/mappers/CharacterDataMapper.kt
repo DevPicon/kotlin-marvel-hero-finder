@@ -34,7 +34,7 @@ class CharacterDataMapper {
     }
 
     private fun convertCharacterItemToDomain(character: ComicCharacter): Hero {
-        return Hero(character.name, character.description,
+        return Hero(character.id, character.name, character.description,
                 generateThumbnailUrl(character.thumbnail.path, character.thumbnail.extension))
     }
 

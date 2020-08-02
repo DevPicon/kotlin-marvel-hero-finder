@@ -56,6 +56,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation 'com.squareup.okhttp3:logging-interceptor:4.6.0'
     implementation "com.google.code.gson:gson:2.8.6"
+
+    // https://developer.android.com/kotlin/ktx
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 }
 repositories {
     mavenCentral()
