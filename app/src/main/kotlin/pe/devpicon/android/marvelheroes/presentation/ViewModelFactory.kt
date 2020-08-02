@@ -2,7 +2,7 @@ package pe.devpicon.android.marvelheroes.presentation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import pe.devpicon.android.marvelheroes.domain.Repository
+import pe.devpicon.android.marvelheroes.data.Repository
 import pe.devpicon.android.marvelheroes.presentation.home.MainViewModel
 import pe.devpicon.android.marvelheroes.presentation.home.MainViewStateMapper
 

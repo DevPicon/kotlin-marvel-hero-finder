@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.mapLatest
-import pe.devpicon.android.marvelheroes.domain.Repository
+import pe.devpicon.android.marvelheroes.data.Repository
 
 @FlowPreview
 @ExperimentalCoroutinesApi

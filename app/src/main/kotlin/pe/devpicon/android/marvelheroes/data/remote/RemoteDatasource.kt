@@ -7,4 +7,14 @@ class RemoteDatasource(private val service: MarvelService) {
         return result.dataResponse.results
     }
 
+    suspend fun fetchCharacter(characterId: Long): ComicCharacterResponse {
+        val result = service.fetchCharacter(characterId)
+        return result.dataResponse.results[0]
+    }
+
+    suspend fun fetchComics(characterId: Long): List<ComicResponse> {
+        val result = service.fetchComics(characterId)
+        return result.data.results
+    }
+
 }

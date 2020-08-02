@@ -5,7 +5,7 @@ import pe.devpicon.android.marvelheroes.data.remote.MarvelService
 import pe.devpicon.android.marvelheroes.data.remote.RemoteDatasource
 import pe.devpicon.android.marvelheroes.data.remote.RestClient
 import pe.devpicon.android.marvelheroes.domain.DomainMapper
-import pe.devpicon.android.marvelheroes.domain.Repository
+import pe.devpicon.android.marvelheroes.data.Repository
 import pe.devpicon.android.marvelheroes.presentation.home.MainViewStateMapper
 
 class AppContainer(applicationContext: Context) {
