@@ -16,9 +16,9 @@ Para este proyecto estoy usando o consumiendo:
 * [Picasso](http://square.github.io/picasso/)
 * [Retrofit](https://square.github.io/retrofit/)
 
+## Versión actual (2020)
 Así es como luce la app hasta el momento:
-
 ![Marvel Characters Directory 2020](/media/screen2020.gif)
 
-Versión antigua (2014)
+## Versión antigua (2014)
 ![Marvel Characters Directory 2014](/media/screen01.gif)
