@@ -10,6 +10,6 @@ data class Hero(
 data class Comic(
         val id: Long,
         val title: String,
-        val description: String,
+        val description: String? = "",
         val thumbnailUrl: String
 )

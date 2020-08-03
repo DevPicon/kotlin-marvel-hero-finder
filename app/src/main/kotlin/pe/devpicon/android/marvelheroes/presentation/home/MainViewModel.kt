@@ -1,5 +1,6 @@
 package pe.devpicon.android.marvelheroes.presentation.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.launch
 import pe.devpicon.android.marvelheroes.data.Repository
 
 @FlowPreview
@@ -39,13 +42,33 @@ class MainViewModel(
 
     val heroes = _heroes.asLiveData()
 
-    suspend fun searchHero(queryText: String): List<SearchViewState> {
+    private suspend fun searchHero(queryText: String): List<SearchViewState> {
         val heroListResult = viewModelScope.async { repository.searchHero(queryText) }
-        return mainViewStateMapper.mapHeroToViewState(heroListResult.await())
+        return mainViewStateMapper.mapHeroToSearchViewState(heroListResult.await())
     }
 
+    // ---- Details and Comics
+
+    fun fetchCharacterAndComic(characterId: Long) {
+        viewModelScope.launch {
+            repository.fetchCharacterDetails(characterId)
+        }
+    }
+
+    val character: LiveData<List<HeroViewState>> = repository.getCharacters()
+            .map {
+                mainViewStateMapper.mapHeroListToViewState(it)
+            }
+            .asLiveData()
+
+    val comics: LiveData<List<ComicViewState>> = repository.getComics()
+            .map {
+                mainViewStateMapper.mapComicListToViewState(it)
+            }
+            .asLiveData()
+
     companion object {
-        const val SEARCH_DELAY_MILLIS = 2000L
+        const val SEARCH_DELAY_MILLIS = 1000L
         const val MIN_QUERY_LENGTH = 3
     }
 }
