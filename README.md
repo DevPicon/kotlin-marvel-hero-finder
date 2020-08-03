@@ -18,6 +18,7 @@ Para este proyecto estoy usando o consumiendo:
 
 ## Versión actual (2020)
 Así es como luce la app hasta el momento:
+
 ![Marvel Characters Directory 2020](/media/screen2020.gif)
 
 ## Versión antigua (2014)
