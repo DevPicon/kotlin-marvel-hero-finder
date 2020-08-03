@@ -18,4 +18,7 @@ Para este proyecto estoy usando o consumiendo:
 
 Así es como luce la app hasta el momento:
 
-![Marvel Characters Directory](/media/screen01.gif)
+![Marvel Characters Directory 2020](/media/screen2020.mp4)
+
+Versión antigua (2014)
+![Marvel Characters Directory 2014](/media/screen01.gif)
