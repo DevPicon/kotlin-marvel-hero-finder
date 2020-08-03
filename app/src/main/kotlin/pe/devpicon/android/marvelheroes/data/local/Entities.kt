@@ -15,7 +15,7 @@ data class CharacterEntity(
 data class ComicEntity(
         @PrimaryKey val id: Long,
         val title: String,
-        val description: String,
+        val description: String?,
         val thumbnailUrl: String,
         val characterId: Long
 )

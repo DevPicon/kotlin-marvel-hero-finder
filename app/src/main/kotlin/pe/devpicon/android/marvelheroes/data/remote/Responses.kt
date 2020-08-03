@@ -45,6 +45,6 @@ data class ComicDataContainerResponse(
 data class ComicResponse(
         @SerializedName("id") val id: Long,
         @SerializedName("title") val title: String,
-        @SerializedName("description") val description: String,
+        @SerializedName("description") val description: String? = "",
         @SerializedName("thumbnail") val thumbnailResponse: ThumbnailResponse
 )

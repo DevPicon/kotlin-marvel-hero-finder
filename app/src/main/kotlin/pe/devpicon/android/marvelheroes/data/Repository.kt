@@ -1,8 +1,10 @@
 package pe.devpicon.android.marvelheroes.data
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.withContext
 import pe.devpicon.android.marvelheroes.data.local.DatabaseMapper
 import pe.devpicon.android.marvelheroes.data.local.LocalDataSource
 import pe.devpicon.android.marvelheroes.data.remote.ComicResponse
@@ -25,7 +27,7 @@ class Repository(
         emptyList()
     }
 
-    suspend fun fetchCharacterDetails(characterId: Long) {
+    suspend fun fetchCharacterDetails(characterId: Long) = withContext(Dispatchers.IO) {
 
         // Fetch character and comic list
         val characterResponse =
@@ -48,10 +50,9 @@ class Repository(
     }
 
     fun getCharacters() = localDataSource.getCharacters()
-            .take(1)
             .map { domainMapper.mapCharacterEntityListToDomain(it) }
 
-    fun getComicsByCharacterId(characterId: Long) = localDataSource.getComicsByCharacter(characterId)
+    fun getComics() = localDataSource.getAllComics()
             .map { domainMapper.mapComicEntityListToDomain(it) }
 
 }

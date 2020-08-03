@@ -16,14 +16,19 @@ interface CharacterDao {
     @Insert
     suspend fun insertCharacter(character: CharacterEntity)
 
-    @Delete
-    suspend fun deleteCharacter(character: CharacterEntity)
+    @Query("delete from character")
+    fun clearAllCharacters()
 
     @Transaction
     suspend fun updateCharacter(characterEntity: CharacterEntity) {
-        deleteCharacter(characterEntity)
+        clearAllCharacters()
         insertCharacter(characterEntity)
     }
+
+    // Unused operations
+
+    @Delete
+    suspend fun deleteCharacter(character: CharacterEntity)
 }
 
 @Dao
@@ -31,21 +36,25 @@ interface ComicDao {
     @Query("select * from comic")
     fun getAllComic(): Flow<List<ComicEntity>>
 
-    @Query("select * from comic where characterId = :characterId")
-    fun getComicsByCharacter(characterId: Long): Flow<List<ComicEntity>>
+    @Insert
+    suspend fun insertComics(comicList: List<ComicEntity>)
+
+    @Query("delete from comic")
+    suspend fun clearAllComics()
+
+    @Transaction
+    suspend fun updateComicsByCharacter(characterId: Long, comicList: List<ComicEntity>) {
+        clearAllComics()
+        insertComics(comicList)
+    }
+
+    // Unused operations
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertComic(comic: ComicEntity)
 
-    @Insert
-    suspend fun insertComics(comicList: List<ComicEntity>)
-
-    @Transaction
-    suspend fun updateComicsByCharacter(characterId: Long, comicList: List<ComicEntity>) {
-        deleteAllComicsByCharacter(characterId)
-        insertComics(comicList)
-    }
-
+    @Query("select * from comic where characterId = :characterId")
+    fun getComicsByCharacter(characterId: Long): Flow<List<ComicEntity>>
 
     @Query("delete from comic where characterId = :characterId")
     suspend fun deleteAllComicsByCharacter(characterId: Long)
