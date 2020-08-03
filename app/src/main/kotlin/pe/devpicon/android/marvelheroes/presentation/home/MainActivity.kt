@@ -1,20 +1,18 @@
 package pe.devpicon.android.marvelheroes.presentation.home
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import org.jetbrains.anko.async
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
-import pe.androidperu.marvelheroes.data.commands.ComicCharacterRequestCommand
+import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.databinding.ActivityMainBinding
 import pe.devpicon.android.marvelheroes.app.MarvelHeroesApp
-import pe.devpicon.android.marvelheroes.domain.Hero
 import pe.devpicon.android.marvelheroes.presentation.MainViewModelFactory
 
 /**
@@ -27,7 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
     private val searchAdapter by lazy {
-        SearchAdapter()
+        SearchAdapter(::onSelectResultHero)
+    }
+    private val comicListAdapter by lazy {
+        ComicListAdapter()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,31 +39,42 @@ class MainActivity : AppCompatActivity() {
         val appContainer = (application as MarvelHeroesApp).appContainer
         mainViewModel = MainViewModelFactory(appContainer.viewStateMapper, appContainer.repository).create()
 
-        // Aqui estamos usando la función 'find' de Anko para obtener el recycler view
-        binding.characterListRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        /**
-         * Async nos permite remplazar el AsynTask y mediante el uiThread podemos acceder al hilo
-         * de la UI para efectuar alguna operación
-         */
-        async() {
-            val result = ComicCharacterRequestCommand().execute()
-            uiThread {
-                binding.characterListRecyclerView.adapter = ComicCharacterListAdapter(result) { comicCharacter: Hero ->
-                    toast(comicCharacter.description)
-                }
-                longToast("Se realizó la consulta")
-            }
-        }
-
-        initSearchBar()
+        initUI()
         initObservers()
+    }
+
+    private fun initUI() {
+        initRecyclerView()
+        initSearchBar()
+    }
+
+    private fun initRecyclerView() {
+        binding.characterListRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        binding.characterListRecyclerView.adapter = comicListAdapter
     }
 
     private fun initObservers() {
         mainViewModel.heroes.observe(this, Observer {
             searchAdapter.setData(it)
         })
+
+        mainViewModel.character.observe(this, Observer {
+            Toast.makeText(this, "hero ${it.size}", Toast.LENGTH_SHORT).show()
+            if (it.isNotEmpty()) {
+                displayHeroData(it[0])
+            }
+        })
+
+        mainViewModel.comics.observe(this, Observer {
+            comicListAdapter.updateData(it)
+        })
+    }
+
+    private fun displayHeroData(heroViewState: HeroViewState) = with(heroViewState) {
+        binding.tvHeroName.text = name
+        binding.tvHeroDescription.text = description
+        Picasso.get().load(thumbnailUrl)
+                .error(R.drawable.broken_shield).into(binding.ivHeroThumbnail)
     }
 
     private fun initSearchBar() {
@@ -85,5 +97,10 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun onSelectResultHero(searchViewState: SearchViewState) {
+        mainViewModel.queryChannel.offer("")
+        mainViewModel.fetchCharacterAndComic(searchViewState.id)
     }
 }
