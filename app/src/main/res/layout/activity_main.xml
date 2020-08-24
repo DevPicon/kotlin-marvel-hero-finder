@@ -116,5 +116,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
 
+    <TextView
+        android:id="@+id/tv_search_loader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="16dp"
+        android:text="@string/loading_search_result"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/pb_search_loader"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_search_loader"
+        app:layout_constraintStart_toStartOf="@id/tv_search_loader"
+        app:layout_constraintTop_toTopOf="@+id/tv_search_loader"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
     

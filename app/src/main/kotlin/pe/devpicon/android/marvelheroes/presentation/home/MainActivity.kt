@@ -1,6 +1,7 @@
 package pe.devpicon.android.marvelheroes.presentation.home
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
@@ -14,6 +15,8 @@ import pe.androidperu.marvelheroes.R
 import pe.androidperu.marvelheroes.databinding.ActivityMainBinding
 import pe.devpicon.android.marvelheroes.app.MarvelHeroesApp
 import pe.devpicon.android.marvelheroes.presentation.MainViewModelFactory
+import pe.devpicon.android.marvelheroes.presentation.home.MainScreenState.LOADING_DATA
+import pe.devpicon.android.marvelheroes.presentation.home.MainScreenState.SHOW_DATA
 
 /**
  * El activity principal
@@ -54,6 +57,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
+        mainViewModel.screenState.observe(this, Observer {
+            when (it) {
+                LOADING_DATA -> displayLoaderOnSearch()
+                SHOW_DATA -> hideLoaderOnSearch()
+                else -> hideLoaderOnSearch()
+            }
+        })
+
         mainViewModel.heroes.observe(this, Observer {
             searchAdapter.setData(it)
         })
@@ -68,6 +79,16 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.comics.observe(this, Observer {
             comicListAdapter.updateData(it)
         })
+    }
+
+    private fun displayLoaderOnSearch() {
+        binding.pbSearchLoader.visibility = View.VISIBLE
+        binding.tvSearchLoader.visibility = View.VISIBLE
+    }
+
+    private fun hideLoaderOnSearch() {
+        binding.pbSearchLoader.visibility = View.GONE
+        binding.tvSearchLoader.visibility = View.GONE
     }
 
     private fun displayHeroData(heroViewState: HeroViewState) = with(heroViewState) {

@@ -1,6 +1,7 @@
 package pe.devpicon.android.marvelheroes.presentation.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import pe.devpicon.android.marvelheroes.data.Repository
+import pe.devpicon.android.marvelheroes.presentation.home.MainScreenState.INITIAL
+import pe.devpicon.android.marvelheroes.presentation.home.MainScreenState.LOADING_DATA
+import pe.devpicon.android.marvelheroes.presentation.home.MainScreenState.SHOW_DATA
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -23,6 +27,13 @@ class MainViewModel(
         private val mainViewStateMapper: MainViewStateMapper,
         private val repository: Repository
 ) : ViewModel() {
+
+    private val _screenState: MutableLiveData<MainScreenState> by lazy { MutableLiveData<MainScreenState>(initState()) }
+
+    val screenState: LiveData<MainScreenState>
+        get() = _screenState
+
+    private fun initState(): MainScreenState = INITIAL
 
     val queryChannel = BroadcastChannel<String>(Channel.CONFLATED)
 
@@ -40,10 +51,13 @@ class MainViewModel(
                 println(this.toString())
             }
 
-    val heroes = _heroes.asLiveData()
+    val heroes = _heroes
+            .asLiveData()
 
     private suspend fun searchHero(queryText: String): List<SearchViewState> {
+        _screenState.value = LOADING_DATA
         val heroListResult = viewModelScope.async { repository.searchHero(queryText) }
+        heroListResult.invokeOnCompletion { _screenState.value = SHOW_DATA }
         return mainViewStateMapper.mapHeroToSearchViewState(heroListResult.await())
     }
 
