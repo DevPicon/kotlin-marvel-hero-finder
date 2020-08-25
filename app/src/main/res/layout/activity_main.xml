@@ -27,9 +27,11 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/cl_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutDescription="@xml/activity_main_scene"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +64,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="16dp"
             app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/hero_thumbnail" />
@@ -77,34 +80,51 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toEndOf="@id/iv_hero_thumbnail"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/iv_hero_thumbnail"
             tools:text="Spider-Man" />
 
         <TextView
             android:id="@+id/tv_hero_description"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@id/tv_comic_layout"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/tv_hero_name"
             app:layout_constraintTop_toBottomOf="@id/tv_hero_name"
             tools:text="Description: \nBitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people." />
 
+
+        <TextView
+            android:id="@+id/tv_comic_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_comic_layout_header"
+            android:padding="24dp"
+            android:text="Comics"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hero_description" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/characterListRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@android:color/white"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_hero_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_comic_layout"
             tools:itemCount="1"
             tools:listitem="@layout/comic_list_item" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 
     <ListView
