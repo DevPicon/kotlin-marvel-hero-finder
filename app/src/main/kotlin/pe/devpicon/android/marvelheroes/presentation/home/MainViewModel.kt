@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
@@ -75,11 +76,19 @@ class MainViewModel(
             }
             .asLiveData()
 
-    val comics: LiveData<List<ComicViewState>> = repository.getComics()
-            .map {
-                mainViewStateMapper.mapComicListToViewState(it)
-            }
-            .asLiveData()
+    private val _comics = MutableLiveData<List<ComicViewState>>()
+    val comics: LiveData<List<ComicViewState>> = _comics
+
+    fun getComics() {
+        viewModelScope.launch {
+            repository.getComics()
+                    .map {
+                        mainViewStateMapper.mapComicListToViewState(it)
+                    }.collect { result ->
+                        _comics.value = result
+                    }
+        }
+    }
 
     companion object {
         const val SEARCH_DELAY_MILLIS = 1000L

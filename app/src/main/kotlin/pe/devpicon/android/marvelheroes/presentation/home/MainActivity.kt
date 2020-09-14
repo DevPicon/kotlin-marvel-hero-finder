@@ -5,8 +5,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,6 +46,31 @@ class MainActivity : AppCompatActivity() {
 
         initUI()
         initObservers()
+        initTransitionListeners()
+    }
+
+    private fun initTransitionListeners() {
+        binding.clContent.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(p0: MotionLayout?, p1: Int, p2: Int) {
+
+            }
+
+            override fun onTransitionChange(p0: MotionLayout?, start: Int, end: Int, p3: Float) {
+                println("Veamos $start $end $p3")
+
+            }
+
+            override fun onTransitionCompleted(p0: MotionLayout?, currentId: Int) {
+                if (currentId == R.id.end) {
+                    mainViewModel.getComics()
+                }
+            }
+
+            override fun onTransitionTrigger(p0: MotionLayout?, p1: Int, p2: Boolean, p3: Float) {
+
+            }
+
+        })
     }
 
     private fun initUI() {
@@ -54,6 +81,9 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         binding.characterListRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         binding.characterListRecyclerView.adapter = comicListAdapter
+
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.characterListRecyclerView)
     }
 
     private fun initObservers() {
