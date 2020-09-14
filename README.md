@@ -16,6 +16,8 @@ Para este proyecto estoy usando o consumiendo:
 * [Picasso](http://square.github.io/picasso/)
 * [Retrofit](https://square.github.io/retrofit/)
 
+* MotionLayout
+
 ## Versión actual (2020)
 Así es como luce la app hasta el momento:
 
